@@ -22,10 +22,20 @@ class QuestionViewControllerTests: XCTestCase {
         var recievedAnswer = ""
         let sut = makeSUT(options: ["A1", "A2"]) { recievedAnswer = $0 }
 
-        let indexPath = IndexPath(row: 0, section: 0)
-        sut.tableView.delegate?.tableView?(sut.tableView, didSelectRowAt: indexPath)
+        sut.tableView.select(at: 0)
 
         XCTAssertEqual(recievedAnswer, "A1")
+    }
+
+    func test_optionSelected_withTwoOptions_notifiesDelegateWithLastSelection() {
+        var recievedAnswer = ""
+        let sut = makeSUT(options: ["A1", "A2"]) { recievedAnswer = $0 }
+
+        sut.tableView.select(at: 0)
+        XCTAssertEqual(recievedAnswer, "A1")
+
+        sut.tableView.select(at: 1)
+        XCTAssertEqual(recievedAnswer, "A2")
     }
 
     // MARK: - Helpers
@@ -49,5 +59,9 @@ private extension UITableView {
 
     func title(at row: Int) -> String? {
         cell(at: row)?.textLabel?.text
+    }
+
+    func select(at row: Int) {
+        delegate?.tableView?(self, didSelectRowAt: IndexPath(row: row, section: 0))
     }
 }
