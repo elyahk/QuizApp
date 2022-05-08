@@ -9,6 +9,7 @@ class QuestionViewController: UIViewController {
 
     private(set) lazy var tableView: UITableView = {
         let view = UITableView()
+        view.dataSource = self
 
         return view
     }()

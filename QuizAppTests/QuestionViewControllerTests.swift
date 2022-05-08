@@ -19,10 +19,10 @@ class QuestionViewControllerTests: XCTestCase {
     }
 
     func test_viewDidLoad_withOneOptions_rendersOneOptions() {
-        let sut = QuestionViewController(question: "Q1", options: [])
+        let sut = QuestionViewController(question: "Q1", options: ["A1"])
 
         _ = sut.view
 
-        XCTAssertEqual(sut.tableView.numberOfRows(inSection: 0), 0)
+        XCTAssertEqual(sut.tableView.numberOfRows(inSection: 0), 1)
     }
 }
