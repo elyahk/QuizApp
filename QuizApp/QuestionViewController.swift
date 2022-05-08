@@ -10,19 +10,22 @@ class QuestionViewController: UIViewController {
     private(set) lazy var tableView: UITableView = {
         let view = UITableView()
         view.dataSource = self
+        view.delegate = self
 
         return view
     }()
 
     private var question = ""
     private var options = [String]()
+    private var selection: ((String) -> Void)? = nil
     private var reuseIdentifier = "Cell"
 
-    convenience init(question: String, options: [String]) {
+    convenience init(question: String, options: [String], selection: @escaping (String) -> Void) {
         self.init()
 
         self.question = question
         self.options = options
+        self.selection = selection
     }
 
     override func loadView() {
@@ -72,4 +75,10 @@ extension QuestionViewController: UITableViewDataSource {
         return UITableViewCell(style: .default, reuseIdentifier: reuseIdentifier)
     }
 
+}
+
+extension QuestionViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selection?(options[indexPath.row])
+    }
 }
