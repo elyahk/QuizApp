@@ -10,18 +10,22 @@ class QuestionViewController: UIViewController {
     private(set) lazy var tableView: UITableView = {
         let view = UITableView()
         view.dataSource = self
+        view.delegate = self
 
         return view
     }()
 
-    private var question: String = ""
-    private var options: [String] = []
+    private var question = ""
+    private var options = [String]()
+    private var selection: ((String) -> Void)? = nil
+    private var reuseIdentifier = "Cell"
 
-    convenience init(question: String, options: [String]) {
+    convenience init(question: String, options: [String], selection: @escaping (String) -> Void) {
         self.init()
 
         self.question = question
         self.options = options
+        self.selection = selection
     }
 
     override func loadView() {
@@ -57,11 +61,24 @@ extension QuestionViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
+        let cell = dequeueCell(in: tableView)
         cell.textLabel?.text = options[indexPath.row]
-        
+
         return cell
     }
 
+    private func dequeueCell(in tableView: UITableView) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) {
+            return cell
+        }
 
+        return UITableViewCell(style: .default, reuseIdentifier: reuseIdentifier)
+    }
+
+}
+
+extension QuestionViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selection?(options[indexPath.row])
+    }
 }
