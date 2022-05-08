@@ -7,12 +7,40 @@ class QuestionViewController: UIViewController {
         return view
     }()
 
-    private var question: String = ""
+    private(set) lazy var tableView: UITableView = {
+        let view = UITableView()
 
-    convenience init(question: String) {
+        return view
+    }()
+
+    private var question: String = ""
+    private var options: [String] = []
+
+    convenience init(question: String, options: [String]) {
         self.init()
 
         self.question = question
+        self.options = options
+    }
+
+    override func loadView() {
+        super.loadView()
+
+        view.addSubview(headerLabel)
+        view.addSubview(tableView)
+
+        NSLayoutConstraint.activate([
+            headerLabel.topAnchor.constraint(equalTo: view.topAnchor),
+            headerLabel.leftAnchor.constraint(equalTo: view.leftAnchor),
+            headerLabel.rightAnchor.constraint(equalTo: view.rightAnchor),
+            headerLabel.bottomAnchor.constraint(equalTo: tableView.topAnchor),
+            headerLabel.heightAnchor.constraint(equalToConstant: 44.0),
+
+            tableView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor),
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
     }
 
     override func viewDidLoad() {
@@ -20,4 +48,16 @@ class QuestionViewController: UIViewController {
 
         headerLabel.text = question
     }
+}
+
+extension QuestionViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return options.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+
+
 }
