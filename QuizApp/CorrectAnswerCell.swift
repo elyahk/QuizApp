@@ -12,6 +12,7 @@ class CorrectAnswerCell: UITableViewCell {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.textColor = .black
+        view.numberOfLines = 0
 
         return view
     }()
@@ -19,7 +20,8 @@ class CorrectAnswerCell: UITableViewCell {
     private(set) lazy var answerLabel: UILabel = {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.textColor = .black
+        view.textColor = .systemGreen
+        view.numberOfLines = 0
 
         return view
     }()

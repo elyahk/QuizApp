@@ -12,7 +12,9 @@ final class ResultViewController: UIViewController {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.textColor = .black
+        view.backgroundColor = .white
         view.textAlignment = .center
+        view.numberOfLines = 0
 
         return view
     }()
@@ -52,7 +54,7 @@ final class ResultViewController: UIViewController {
         view.addSubview(tableView)
 
         NSLayoutConstraint.activate([
-            headerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 20.0),
+            headerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20.0),
             headerLabel.leftAnchor.constraint(equalTo: view.leftAnchor),
             headerLabel.rightAnchor.constraint(equalTo: view.rightAnchor),
             headerLabel.bottomAnchor.constraint(equalTo: tableView.topAnchor),
