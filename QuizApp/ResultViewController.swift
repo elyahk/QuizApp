@@ -131,8 +131,8 @@ final class ResultViewController: UIViewController {
         let view = UITableView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.dataSource = self
-        view.register(CorrectAnswerCell.self, forCellReuseIdentifier: correctAnswerCellIdentifier)
-        view.register(WrongAnswerCell.self, forCellReuseIdentifier: wrongAnswerCellIdentifier)
+        view.register(CorrectAnswerCell.self)
+        view.register(WrongAnswerCell.self)
         view.backgroundColor = .systemGray5
 
         return view
@@ -191,7 +191,7 @@ extension ResultViewController: UITableViewDataSource {
     }
 
     private func correctAnswerCell(for answer: PresentableAnswer) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: correctAnswerCellIdentifier) as? CorrectAnswerCell else {
+        guard let cell = tableView.dequeueReusableCell(CorrectAnswerCell.self) else {
             return CorrectAnswerCell()
         }
 
@@ -202,7 +202,7 @@ extension ResultViewController: UITableViewDataSource {
     }
 
     private func wrongAnswerCell(for answer: PresentableAnswer) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: wrongAnswerCellIdentifier) as? WrongAnswerCell else {
+        guard let cell = tableView.dequeueReusableCell(WrongAnswerCell.self) else {
             return WrongAnswerCell()
         }
 
@@ -213,3 +213,4 @@ extension ResultViewController: UITableViewDataSource {
         return cell
     }
 }
+
