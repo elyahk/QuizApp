@@ -6,16 +6,10 @@ class ResultViewControllerTests: XCTestCase {
         XCTAssertEqual(makeSUT(result: "Correct 1/2").headerLabel.text, "Correct 1/2")
     }
 
-    func test_viewDidLoad_withoutAnswers_doesNotRendersAnswers() {
-        let sut = makeSUT(answers: [])
-
-        XCTAssertEqual(sut.tableView.numberOfRows(inSection: 0), 0)
-    }
-
-    func test_viewDidLoad_withOneAnswers_rendersOneAnswer() {
-        let sut = makeSUT(answers: ["A1"])
-
-        XCTAssertEqual(sut.tableView.numberOfRows(inSection: 0), 1)
+    func test_viewDidLoad_rendersAnswer() {
+        XCTAssertEqual(makeSUT(answers: []).tableView.numberOfRows(inSection: 0), 0)
+        XCTAssertEqual(makeSUT(answers: [makeDummyAnswer()]).tableView.numberOfRows(inSection: 0), 1)
+        XCTAssertEqual(makeSUT(answers: [makeDummyAnswer(), makeDummyAnswer()]).tableView.numberOfRows(inSection: 0), 2)
     }
 
     // MARK: - Helpers
@@ -26,4 +20,6 @@ class ResultViewControllerTests: XCTestCase {
 
         return sut
     }
+
+    private func makeDummyAnswer() -> String { return "A answer" }
 }
