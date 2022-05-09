@@ -11,7 +11,6 @@ struct PresentableAnswer {
     let question: String
     let answer: String
     let wrongAnswer: String?
-    let isCorrect: Bool
 }
 
 class CorrectAnswerCell: UITableViewCell {
@@ -188,7 +187,7 @@ extension ResultViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let answer = answers[indexPath.row]
 
-        return answer.isCorrect ? correctAnswerCell(for: answer) : wrongAnswerCell(for: answer)
+        return answer.wrongAnswer == nil ? correctAnswerCell(for: answer) : wrongAnswerCell(for: answer)
     }
 
     private func correctAnswerCell(for answer: PresentableAnswer) -> UITableViewCell {
@@ -206,7 +205,7 @@ extension ResultViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: wrongAnswerCellIdentifier) as? WrongAnswerCell else {
             return WrongAnswerCell()
         }
-        
+
         cell.questionLabel.text = answer.question
         cell.correctAnswerLabel.text = answer.answer
         cell.wrongAnswerLabel.text = answer.wrongAnswer

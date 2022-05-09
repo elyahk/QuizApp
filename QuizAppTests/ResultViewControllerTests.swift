@@ -13,7 +13,7 @@ class ResultViewControllerTests: XCTestCase {
     }
 
     func test_viewDidLoad_withCorrectAnswer_configureCell() {
-        let sut = makeSUT(answers: [makeAnswer(question: "Q1", answer: "A1", isCorrect: true)])
+        let sut = makeSUT(answers: [makeAnswer(question: "Q1", answer: "A1")])
 
         let cell = sut.tableView.cell(at: 0) as? CorrectAnswerCell
 
@@ -23,7 +23,7 @@ class ResultViewControllerTests: XCTestCase {
     }
 
     func test_viewDidLoad_withWrongAnswer_configureCell() {
-        let sut = makeSUT(answers: [makeAnswer(question: "Q1", answer: "A1", wrongAnswer: "A2", isCorrect: false)])
+        let sut = makeSUT(answers: [makeAnswer(question: "Q1", answer: "A1", wrongAnswer: "A2")])
 
         let cell = sut.tableView.cell(at: 0) as? WrongAnswerCell
 
@@ -31,14 +31,6 @@ class ResultViewControllerTests: XCTestCase {
         XCTAssertEqual(cell?.questionLabel.text, "Q1")
         XCTAssertEqual(cell?.correctAnswerLabel.text, "A1")
         XCTAssertEqual(cell?.wrongAnswerLabel.text, "A2")
-    }
-
-    func test_viewDidLoad_withWrongtAnswer_rendersWrongAnswerCell() {
-        let sut = makeSUT(answers: [makeAnswer(isCorrect: false)])
-
-        let cell = sut.tableView.cell(at: 0) as? WrongAnswerCell
-
-        XCTAssertNotNil(cell)
     }
 
     // MARK: - Helpers
@@ -50,9 +42,9 @@ class ResultViewControllerTests: XCTestCase {
         return sut
     }
 
-    private func makeDummyAnswer() -> PresentableAnswer { return makeAnswer(isCorrect: false) }
+    private func makeDummyAnswer() -> PresentableAnswer { return makeAnswer() }
 
-    private func makeAnswer(question: String = "", answer: String = "", wrongAnswer: String? = nil, isCorrect: Bool) -> PresentableAnswer {
-        return PresentableAnswer(question: question, answer: answer, wrongAnswer: wrongAnswer, isCorrect: isCorrect)
+    private func makeAnswer(question: String = "", answer: String = "", wrongAnswer: String? = nil) -> PresentableAnswer {
+        return PresentableAnswer(question: question, answer: answer, wrongAnswer: wrongAnswer)
     }
 }
