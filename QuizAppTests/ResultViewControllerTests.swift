@@ -20,6 +20,14 @@ class ResultViewControllerTests: XCTestCase {
         XCTAssertNotNil(cell)
     }
 
+    func test_viewDidLoad_withWrongtAnswer_rendersWrongAnswerCell() {
+        let sut = makeSUT(answers: [PresentableAnswer(isCorrect: false)])
+        let indexPath = IndexPath(row: 0, section: 0)
+        let cell = sut.tableView.dataSource?.tableView(sut.tableView, cellForRowAt: indexPath) as? WrongAnswerCell
+
+        XCTAssertNotNil(cell)
+    }
+
     // MARK: - Helpers
 
     private func makeSUT(result: String = "", answers: [PresentableAnswer] = []) -> ResultViewController {

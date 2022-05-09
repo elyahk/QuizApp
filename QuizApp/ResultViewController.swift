@@ -15,6 +15,10 @@ class CorrectAnswerCell: UITableViewCell {
 
 }
 
+class WrongAnswerCell: UITableViewCell {
+
+}
+
 final class ResultViewController: UIViewController {
     private(set) lazy var headerLabel: UILabel = {
         let view = UILabel()
@@ -80,7 +84,9 @@ extension ResultViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return CorrectAnswerCell()
+        let answer = answers[indexPath.row]
+
+        return answer.isCorrect ? CorrectAnswerCell() : WrongAnswerCell()
     }
 
 
