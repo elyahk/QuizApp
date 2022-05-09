@@ -10,6 +10,7 @@ import UIKit
 struct PresentableAnswer {
     let question: String
     let answer: String
+    let wrongAnswer: String?
     let isCorrect: Bool
 }
 
@@ -70,6 +71,14 @@ class WrongAnswerCell: UITableViewCell {
         return view
     }()
 
+    private(set) lazy var correctAnswerLabel: UILabel = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.textColor = .black
+
+        return view
+    }()
+
     private(set) lazy var wrongAnswerLabel: UILabel = {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -78,16 +87,8 @@ class WrongAnswerCell: UITableViewCell {
         return view
     }()
 
-    private(set) lazy var answerLabel: UILabel = {
-        let view = UILabel()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.textColor = .black
-
-        return view
-    }()
-
     private(set) lazy var containerView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [questionLabel, wrongAnswerLabel, answerLabel])
+        let view = UIStackView(arrangedSubviews: [questionLabel, correctAnswerLabel, wrongAnswerLabel])
         view.translatesAutoresizingMaskIntoConstraints = false
         view.spacing = 4.0
         view.axis = .vertical
@@ -205,9 +206,10 @@ extension ResultViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: wrongAnswerCellIdentifier) as? WrongAnswerCell else {
             return WrongAnswerCell()
         }
-
+        
         cell.questionLabel.text = answer.question
-        cell.answerLabel.text = answer.answer
+        cell.correctAnswerLabel.text = answer.answer
+        cell.wrongAnswerLabel.text = answer.wrongAnswer
 
         return cell
     }
