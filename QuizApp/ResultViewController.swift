@@ -7,6 +7,14 @@
 
 import UIKit
 
+struct PresentableAnswer {
+    var isCorrect: Bool
+}
+
+class CorrectAnswerCell: UITableViewCell {
+
+}
+
 final class ResultViewController: UIViewController {
     private(set) lazy var headerLabel: UILabel = {
         let view = UILabel()
@@ -28,9 +36,9 @@ final class ResultViewController: UIViewController {
     }()
 
     private var result = ""
-    private var answers = [String]()
+    private var answers = [PresentableAnswer]()
 
-    convenience init(result: String, answers: [String]) {
+    convenience init(result: String, answers: [PresentableAnswer]) {
         self.init()
 
         self.result = result
@@ -72,7 +80,7 @@ extension ResultViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        return CorrectAnswerCell()
     }
 
 

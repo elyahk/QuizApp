@@ -12,14 +12,22 @@ class ResultViewControllerTests: XCTestCase {
         XCTAssertEqual(makeSUT(answers: [makeDummyAnswer(), makeDummyAnswer()]).tableView.numberOfRows(inSection: 0), 2)
     }
 
+    func test_viewDidLoad_withCorrectAnswer_rendersCorrectAnswerCell() {
+        let sut = makeSUT(answers: [PresentableAnswer(isCorrect: true)])
+        let indexPath = IndexPath(row: 0, section: 0)
+        let cell = sut.tableView.dataSource?.tableView(sut.tableView, cellForRowAt: indexPath) as? CorrectAnswerCell
+
+        XCTAssertNotNil(cell)
+    }
+
     // MARK: - Helpers
 
-    private func makeSUT(result: String = "", answers: [String] = []) -> ResultViewController {
+    private func makeSUT(result: String = "", answers: [PresentableAnswer] = []) -> ResultViewController {
         let sut = ResultViewController(result: result, answers: answers)
         _ = sut.view
 
         return sut
     }
 
-    private func makeDummyAnswer() -> String { return "A answer" }
+    private func makeDummyAnswer() -> PresentableAnswer { return PresentableAnswer(isCorrect: false) }
 }
