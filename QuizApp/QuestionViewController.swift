@@ -79,6 +79,15 @@ extension QuestionViewController: UITableViewDataSource {
 
 extension QuestionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selection?(tableView.indexPathsForSelectedRows!.map { options[$0.row] })
+        selection?(selectedOptions(in: tableView))
+    }
+
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        selection?(selectedOptions(in: tableView))
+    }
+
+    private func selectedOptions(in tableView: UITableView) -> [String] {
+        guard let indexPaths = tableView.indexPathsForSelectedRows else { return [] }
+        return indexPaths.map { options[$0.row] }
     }
 }
