@@ -22,6 +22,16 @@ class ResultViewControllerTests: XCTestCase {
         XCTAssertEqual(cell?.answerLabel.text, "A1")
     }
 
+    func test_viewDidLoad_withWrongAnswer_configureCell() {
+        let sut = makeSUT(answers: [makeAnswer(question: "Q1", answer: "A1", isCorrect: false)])
+
+        let cell = sut.tableView.cell(at: 0) as? WrongAnswerCell
+
+        XCTAssertNotNil(cell)
+        XCTAssertEqual(cell?.questionLabel.text, "Q1")
+        XCTAssertEqual(cell?.answerLabel.text, "A1")
+    }
+
     func test_viewDidLoad_withWrongtAnswer_rendersWrongAnswerCell() {
         let sut = makeSUT(answers: [makeAnswer(isCorrect: false)])
 

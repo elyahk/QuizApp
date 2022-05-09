@@ -62,7 +62,59 @@ class CorrectAnswerCell: UITableViewCell {
 }
 
 class WrongAnswerCell: UITableViewCell {
+    private(set) lazy var questionLabel: UILabel = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.textColor = .black
 
+        return view
+    }()
+
+    private(set) lazy var wrongAnswerLabel: UILabel = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.textColor = .black
+
+        return view
+    }()
+
+    private(set) lazy var answerLabel: UILabel = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.textColor = .black
+
+        return view
+    }()
+
+    private(set) lazy var containerView: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [questionLabel, wrongAnswerLabel, answerLabel])
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.spacing = 4.0
+        view.axis = .vertical
+
+        return view
+    }()
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        setupSubviews()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    private func setupSubviews() {
+        contentView.addSubview(containerView)
+
+        NSLayoutConstraint.activate([
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            containerView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            containerView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+        ])
+    }
 }
 
 final class ResultViewController: UIViewController {
@@ -80,6 +132,7 @@ final class ResultViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.dataSource = self
         view.register(CorrectAnswerCell.self, forCellReuseIdentifier: correctAnswerCellIdentifier)
+        view.register(WrongAnswerCell.self, forCellReuseIdentifier: wrongAnswerCellIdentifier)
         view.backgroundColor = .systemGray5
 
         return view
@@ -88,6 +141,7 @@ final class ResultViewController: UIViewController {
     private var result = ""
     private var answers = [PresentableAnswer]()
     private let correctAnswerCellIdentifier = "CorrectAnswerCell"
+    private let wrongAnswerCellIdentifier = "WrongAnswerCell"
 
     convenience init(result: String, answers: [PresentableAnswer]) {
         self.init()
@@ -132,14 +186,24 @@ extension ResultViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let answer = answers[indexPath.row]
-        if answer.isCorrect { return correctAnswerCell(for: answer) }
 
-        return answer.isCorrect ? CorrectAnswerCell() : WrongAnswerCell()
+        return answer.isCorrect ? correctAnswerCell(for: answer) : wrongAnswerCell(for: answer)
     }
 
     private func correctAnswerCell(for answer: PresentableAnswer) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: correctAnswerCellIdentifier) as? CorrectAnswerCell else {
             return CorrectAnswerCell()
+        }
+
+        cell.questionLabel.text = answer.question
+        cell.answerLabel.text = answer.answer
+
+        return cell
+    }
+
+    private func wrongAnswerCell(for answer: PresentableAnswer) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: wrongAnswerCellIdentifier) as? WrongAnswerCell else {
+            return WrongAnswerCell()
         }
 
         cell.questionLabel.text = answer.question
