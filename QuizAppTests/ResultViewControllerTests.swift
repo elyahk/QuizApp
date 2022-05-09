@@ -12,6 +12,12 @@ class ResultViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.tableView.numberOfRows(inSection: 0), 0)
     }
 
+    func test_viewDidLoad_withOneAnswers_rendersOneAnswer() {
+        let sut = makeSUT(answers: ["A1"])
+
+        XCTAssertEqual(sut.tableView.numberOfRows(inSection: 0), 1)
+    }
+
     // MARK: - Helpers
 
     private func makeSUT(result: String = "", answers: [String] = []) -> ResultViewController {

@@ -21,17 +21,20 @@ final class ResultViewController: UIViewController {
     private(set) lazy var tableView: UITableView = {
         let view = UITableView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.dataSource = self
         view.backgroundColor = .systemGray5
 
         return view
     }()
 
     private var result = ""
+    private var answers = [String]()
 
     convenience init(result: String, answers: [String]) {
         self.init()
 
         self.result = result
+        self.answers = answers
     }
 
     override func loadView() {
@@ -61,4 +64,16 @@ final class ResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+}
+
+extension ResultViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return answers.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+
+
 }
