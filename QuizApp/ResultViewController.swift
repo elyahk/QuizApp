@@ -9,6 +9,7 @@ import UIKit
 
 struct PresentableAnswer {
     let question: String
+    let answer: String
     let isCorrect: Bool
 }
 
@@ -17,6 +18,23 @@ class CorrectAnswerCell: UITableViewCell {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.textColor = .black
+
+        return view
+    }()
+
+    private(set) lazy var answerLabel: UILabel = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.textColor = .black
+
+        return view
+    }()
+
+    private(set) lazy var containerView: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [questionLabel, answerLabel])
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.spacing = 4.0
+        view.axis = .vertical
 
         return view
     }()
@@ -32,13 +50,13 @@ class CorrectAnswerCell: UITableViewCell {
     }
 
     private func setupSubviews() {
-        contentView.addSubview(questionLabel)
+        contentView.addSubview(containerView)
 
         NSLayoutConstraint.activate([
-            questionLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            questionLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            questionLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor),
-            questionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            containerView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            containerView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }
 }
@@ -115,12 +133,11 @@ extension ResultViewController: UITableViewDataSource {
         if answer.isCorrect {
             let cell = CorrectAnswerCell()
             cell.questionLabel.text = answer.question
+            cell.answerLabel.text = answer.answer
 
             return cell
         }
-        
+
         return answer.isCorrect ? CorrectAnswerCell() : WrongAnswerCell()
     }
-
-
 }
