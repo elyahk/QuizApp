@@ -8,11 +8,39 @@
 import UIKit
 
 struct PresentableAnswer {
-    var isCorrect: Bool
+    let question: String
+    let isCorrect: Bool
 }
 
 class CorrectAnswerCell: UITableViewCell {
+    private(set) lazy var questionLabel: UILabel = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.textColor = .black
 
+        return view
+    }()
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        setupSubviews()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    private func setupSubviews() {
+        contentView.addSubview(questionLabel)
+
+        NSLayoutConstraint.activate([
+            questionLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            questionLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            questionLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            questionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+        ])
+    }
 }
 
 class WrongAnswerCell: UITableViewCell {
@@ -24,7 +52,6 @@ final class ResultViewController: UIViewController {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.textColor = .black
-        view.text = "Test"
         view.textAlignment = .center
 
         return view
@@ -85,7 +112,13 @@ extension ResultViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let answer = answers[indexPath.row]
+        if answer.isCorrect {
+            let cell = CorrectAnswerCell()
+            cell.questionLabel.text = answer.question
 
+            return cell
+        }
+        
         return answer.isCorrect ? CorrectAnswerCell() : WrongAnswerCell()
     }
 
