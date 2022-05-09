@@ -11,6 +11,9 @@
 		2C346A622828AD1300D83BCE /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C346A612828AD1300D83BCE /* ResultViewController.swift */; };
 		2C346A642828B34800D83BCE /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C346A632828B34800D83BCE /* Helpers.swift */; };
 		2C346A662828C18A00D83BCE /* UITableView+register+dequeue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C346A652828C18A00D83BCE /* UITableView+register+dequeue.swift */; };
+		2C346A682828C21600D83BCE /* PresentableAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C346A672828C21600D83BCE /* PresentableAnswer.swift */; };
+		2C346A6A2828C23100D83BCE /* CorrectAnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C346A692828C23100D83BCE /* CorrectAnswerCell.swift */; };
+		2C346A6C2828C25100D83BCE /* WrongAnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C346A6B2828C25100D83BCE /* WrongAnswerCell.swift */; };
 		2CFCC2482827F821007CEB93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFCC2472827F821007CEB93 /* AppDelegate.swift */; };
 		2CFCC2512827F822007CEB93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CFCC2502827F822007CEB93 /* Assets.xcassets */; };
 		2CFCC2542827F822007CEB93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CFCC2522827F822007CEB93 /* LaunchScreen.storyboard */; };
@@ -33,6 +36,9 @@
 		2C346A612828AD1300D83BCE /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		2C346A632828B34800D83BCE /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		2C346A652828C18A00D83BCE /* UITableView+register+dequeue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+register+dequeue.swift"; sourceTree = "<group>"; };
+		2C346A672828C21600D83BCE /* PresentableAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableAnswer.swift; sourceTree = "<group>"; };
+		2C346A692828C23100D83BCE /* CorrectAnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectAnswerCell.swift; sourceTree = "<group>"; };
+		2C346A6B2828C25100D83BCE /* WrongAnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongAnswerCell.swift; sourceTree = "<group>"; };
 		2CFCC2442827F821007CEB93 /* QuizApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CFCC2472827F821007CEB93 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CFCC2502827F822007CEB93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -83,6 +89,9 @@
 			isa = PBXGroup;
 			children = (
 				2C346A612828AD1300D83BCE /* ResultViewController.swift */,
+				2C346A6B2828C25100D83BCE /* WrongAnswerCell.swift */,
+				2C346A692828C23100D83BCE /* CorrectAnswerCell.swift */,
+				2C346A672828C21600D83BCE /* PresentableAnswer.swift */,
 				2C346A652828C18A00D83BCE /* UITableView+register+dequeue.swift */,
 				2CFCC2472827F821007CEB93 /* AppDelegate.swift */,
 				2CFCC2502827F822007CEB93 /* Assets.xcassets */,
@@ -204,6 +213,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C346A682828C21600D83BCE /* PresentableAnswer.swift in Sources */,
+				2C346A6A2828C23100D83BCE /* CorrectAnswerCell.swift in Sources */,
+				2C346A6C2828C25100D83BCE /* WrongAnswerCell.swift in Sources */,
 				2CFCC2482827F821007CEB93 /* AppDelegate.swift in Sources */,
 				2C346A662828C18A00D83BCE /* UITableView+register+dequeue.swift in Sources */,
 				2CFCC27A282806BC007CEB93 /* QuestionViewController.swift in Sources */,
