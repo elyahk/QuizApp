@@ -3,14 +3,20 @@ import UIKit
 class QuestionViewController: UIViewController {
     private(set) lazy var headerLabel: UILabel = {
         let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.textColor = .black
+        view.text = "Test"
+        view.textAlignment = .center
 
         return view
     }()
 
     private(set) lazy var tableView: UITableView = {
         let view = UITableView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.dataSource = self
         view.delegate = self
+        view.backgroundColor = .systemGray5
 
         return view
     }()
@@ -31,17 +37,25 @@ class QuestionViewController: UIViewController {
     override func loadView() {
         super.loadView()
 
+        setupSubviews()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+    }
+
+    private func setupSubviews() {
         view.addSubview(headerLabel)
         view.addSubview(tableView)
 
         NSLayoutConstraint.activate([
-            headerLabel.topAnchor.constraint(equalTo: view.topAnchor),
+            headerLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 20.0),
             headerLabel.leftAnchor.constraint(equalTo: view.leftAnchor),
             headerLabel.rightAnchor.constraint(equalTo: view.rightAnchor),
             headerLabel.bottomAnchor.constraint(equalTo: tableView.topAnchor),
             headerLabel.heightAnchor.constraint(equalToConstant: 44.0),
 
-            tableView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -51,6 +65,7 @@ class QuestionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.backgroundColor = .white
         headerLabel.text = question
     }
 }
@@ -83,11 +98,14 @@ extension QuestionViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        selection?(selectedOptions(in: tableView))
+        if tableView.allowsMultipleSelection {
+            selection?(selectedOptions(in: tableView))
+        }
     }
 
     private func selectedOptions(in tableView: UITableView) -> [String] {
         guard let indexPaths = tableView.indexPathsForSelectedRows else { return [] }
+
         return indexPaths.map { options[$0.row] }
     }
 }
