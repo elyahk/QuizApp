@@ -6,10 +6,16 @@ class ResultViewControllerTests: XCTestCase {
         XCTAssertEqual(makeSUT(result: "Correct 1/2").headerLabel.text, "Correct 1/2")
     }
 
+    func test_viewDidLoad_withoutAnswers_doesNotRendersAnswers() {
+        let sut = makeSUT(answers: [])
+
+        XCTAssertEqual(sut.tableView.numberOfRows(inSection: 0), 0)
+    }
+
     // MARK: - Helpers
 
-    private func makeSUT(result: String = "") -> ResultViewController {
-        let sut = ResultViewController(result: result)
+    private func makeSUT(result: String = "", answers: [String] = []) -> ResultViewController {
+        let sut = ResultViewController(result: result, answers: answers)
         _ = sut.view
 
         return sut

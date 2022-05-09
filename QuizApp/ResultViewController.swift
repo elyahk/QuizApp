@@ -28,7 +28,7 @@ final class ResultViewController: UIViewController {
 
     private var result = ""
 
-    convenience init(result: String) {
+    convenience init(result: String, answers: [String]) {
         self.init()
 
         self.result = result
