@@ -79,6 +79,7 @@ final class ResultViewController: UIViewController {
         let view = UITableView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.dataSource = self
+        view.register(CorrectAnswerCell.self, forCellReuseIdentifier: correctAnswerCellIdentifier)
         view.backgroundColor = .systemGray5
 
         return view
@@ -86,6 +87,7 @@ final class ResultViewController: UIViewController {
 
     private var result = ""
     private var answers = [PresentableAnswer]()
+    private let correctAnswerCellIdentifier = "CorrectAnswerCell"
 
     convenience init(result: String, answers: [PresentableAnswer]) {
         self.init()
@@ -130,14 +132,19 @@ extension ResultViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let answer = answers[indexPath.row]
-        if answer.isCorrect {
-            let cell = CorrectAnswerCell()
-            cell.questionLabel.text = answer.question
-            cell.answerLabel.text = answer.answer
-
-            return cell
-        }
+        if answer.isCorrect { return correctAnswerCell(for: answer) }
 
         return answer.isCorrect ? CorrectAnswerCell() : WrongAnswerCell()
+    }
+
+    private func correctAnswerCell(for answer: PresentableAnswer) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: correctAnswerCellIdentifier) as? CorrectAnswerCell else {
+            return CorrectAnswerCell()
+        }
+
+        cell.questionLabel.text = answer.question
+        cell.answerLabel.text = answer.answer
+
+        return cell
     }
 }
