@@ -38,15 +38,31 @@ class NavigationControllerRouterTests: XCTestCase{
         XCTAssertEqual(navigationController.viewControllers, [viewController, secondViewController])
     }
 
+    func test_routeToQuestion_presentsQuestionViewControllerWithRightCallback() {
+        let navigationController = UINavigationController()
+        let factory = NavigationControlllerFactoryStub()
+        let sut = NavigationControllerRouter(navigationController, factory: factory)
+        let viewController = UIViewController()
+
+        var callbackWasFired = false
+        factory.stub(for: "Q1", with: viewController)
+        sut.routeTo(question: "Q1", answerCallback: { _ in callbackWasFired = true })
+        factory.answerCallback["Q1"]!("anything")
+
+        XCTAssertTrue(callbackWasFired)
+    }
+
     class NavigationControlllerFactoryStub: NavigationControllerFactory {
         var stub = [String: UIViewController]()
+        var answerCallback: [String: (String) -> Void] = [:]
 
         func stub(for question: String, with viewController: UIViewController) {
             stub[question] = viewController
         }
 
-        func questionViewController(for question: String, answerCallback: (String) -> Void) -> UIViewController {
-            return stub[question]!
+        func questionViewController(for question: String, answerCallback: @escaping (String) -> Void) -> UIViewController {
+            self.answerCallback[question] = answerCallback
+            return stub[question] ?? UIViewController()
         }
     }
 }
