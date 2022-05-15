@@ -37,10 +37,14 @@ class NavigationControllerRouter: Router {
     }
 
     func routeTo(question: Question<String>, answerCallback: @escaping AnswerCallback) {
-        navigationController.pushViewController(factory.questionViewController(for: question, answerCallback: answerCallback), animated: true)
+        show(factory.questionViewController(for: question, answerCallback: answerCallback))
     }
 
     func routeTo(result: Result<Question<String>, String>) {
-        navigationController.pushViewController(factory.resultViewController(for: result), animated: true)
+        show(factory.resultViewController(for: result))
+    }
+
+    private func show(_ viewController: UIViewController) {
+        navigationController.pushViewController(viewController, animated: true)
     }
 }
