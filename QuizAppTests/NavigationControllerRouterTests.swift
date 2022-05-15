@@ -13,20 +13,25 @@ import QuizEngine
 class NavigationControllerRouterTests: XCTestCase{
     func test_routeToQuestion_presentsQuestionViewController() {
         let navigationController = UINavigationController()
-        let sut = NavigationControllerRouter(navigationController)
+        let factory = NavigationControlllerFactoryStub()
+        let sut = NavigationControllerRouter(navigationController, factory: factory)
+        let viewController = UIViewController()
+        factory.stub(for: "Q1", with: viewController)
 
         sut.routeTo(question: "Q1", answerCallback: { _ in })
 
-        XCTAssertEqual(navigationController.viewControllers.count, 1)
+        XCTAssertEqual(navigationController.viewControllers.first, viewController)
     }
 
-    func test_routeToQuestionTwice_presentsQuestionViewController() {
-        let navigationController = UINavigationController()
-        let sut = NavigationControllerRouter(navigationController)
+    class NavigationControlllerFactoryStub: NavigationControllerFactory {
+        var stub = [String: UIViewController]()
 
-        sut.routeTo(question: "Q1", answerCallback: { _ in })
-        sut.routeTo(question: "Q2", answerCallback: { _ in })
+        func stub(for question: String, with viewController: UIViewController) {
+            stub[question] = viewController
+        }
 
-        XCTAssertEqual(navigationController.viewControllers.count, 2)
+        func questionViewController(for question: String, answerCallback: (String) -> Void) -> UIViewController {
+            return stub[question]!
+        }
     }
 }
