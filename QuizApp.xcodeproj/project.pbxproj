@@ -12,6 +12,8 @@
 		2C22063C2830ABC30034FAED /* QuizEngine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2C22063A2830ABC30034FAED /* QuizEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2C22063E2830AD440034FAED /* NavigationControllerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22063D2830AD440034FAED /* NavigationControllerRouter.swift */; };
 		2C2206442830BB7B0034FAED /* QuestionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2206422830BB640034FAED /* QuestionTests.swift */; };
+		2C2206482830D82D0034FAED /* NavigationControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2206472830D82C0034FAED /* NavigationControllerFactory.swift */; };
+		2C22064A2830D85B0034FAED /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2206492830D85B0034FAED /* Question.swift */; };
 		2C346A602828ACA000D83BCE /* ResultViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C346A5E2828AC9A00D83BCE /* ResultViewControllerTests.swift */; };
 		2C346A622828AD1300D83BCE /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C346A612828AD1300D83BCE /* ResultViewController.swift */; };
 		2C346A642828B34800D83BCE /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C346A632828B34800D83BCE /* Helpers.swift */; };
@@ -55,6 +57,8 @@
 		2C22063A2830ABC30034FAED /* QuizEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = QuizEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C22063D2830AD440034FAED /* NavigationControllerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerRouter.swift; sourceTree = "<group>"; };
 		2C2206422830BB640034FAED /* QuestionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTests.swift; sourceTree = "<group>"; };
+		2C2206472830D82C0034FAED /* NavigationControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerFactory.swift; sourceTree = "<group>"; };
+		2C2206492830D85B0034FAED /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		2C346A5E2828AC9A00D83BCE /* ResultViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewControllerTests.swift; sourceTree = "<group>"; };
 		2C346A612828AD1300D83BCE /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		2C346A632828B34800D83BCE /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
@@ -121,6 +125,7 @@
 		2CFCC2462827F821007CEB93 /* QuizApp */ = {
 			isa = PBXGroup;
 			children = (
+				2C2206472830D82C0034FAED /* NavigationControllerFactory.swift */,
 				2C346A612828AD1300D83BCE /* ResultViewController.swift */,
 				2C346A6B2828C25100D83BCE /* WrongAnswerCell.swift */,
 				2C346A692828C23100D83BCE /* CorrectAnswerCell.swift */,
@@ -132,6 +137,7 @@
 				2CFCC2552827F822007CEB93 /* Info.plist */,
 				2CFCC279282806BC007CEB93 /* QuestionViewController.swift */,
 				2C22063D2830AD440034FAED /* NavigationControllerRouter.swift */,
+				2C2206492830D85B0034FAED /* Question.swift */,
 			);
 			path = QuizApp;
 			sourceTree = "<group>";
@@ -255,8 +261,10 @@
 				2C346A6A2828C23100D83BCE /* CorrectAnswerCell.swift in Sources */,
 				2C346A6C2828C25100D83BCE /* WrongAnswerCell.swift in Sources */,
 				2CFCC2482827F821007CEB93 /* AppDelegate.swift in Sources */,
+				2C22064A2830D85B0034FAED /* Question.swift in Sources */,
 				2C346A662828C18A00D83BCE /* UITableView+register+dequeue.swift in Sources */,
 				2CFCC27A282806BC007CEB93 /* QuestionViewController.swift in Sources */,
+				2C2206482830D82D0034FAED /* NavigationControllerFactory.swift in Sources */,
 				2C346A622828AD1300D83BCE /* ResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
