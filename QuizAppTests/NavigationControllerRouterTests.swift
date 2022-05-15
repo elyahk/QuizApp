@@ -11,8 +11,8 @@ import QuizEngine
 @testable import QuizApp
 
 class NavigationControllerRouterTests: XCTestCase{
-    var navigationController = UINavigationController()
     var factory = NavigationControlllerFactoryStub()
+    fileprivate var navigationController = NonAnimatedNavigationController()
     lazy var sut: NavigationControllerRouter = {
         return NavigationControllerRouter(self.navigationController, factory: self.factory)
     }()
@@ -46,19 +46,54 @@ class NavigationControllerRouterTests: XCTestCase{
         XCTAssertTrue(callbackWasFired)
     }
 
+    func test_routeToResult_showsResultViewController() {
+        let result = Result(answers: [Question.singleAnswer("a string"): "Answer"], score: 1)
+        let viewController = UIViewController()
+        factory.stub(result: result, with: viewController)
+        sut.routeTo(result: result)
+
+        XCTAssertEqual(navigationController.viewControllers, [viewController])
+    }
+
     // MARK: - Helpers
 
     final class NavigationControlllerFactoryStub: NavigationControllerFactory {
-        var stub = [Question<String>: UIViewController]()
+        var stubedQuestions = [Question<String>: UIViewController]()
+        var stubedResults = [Result<Question<String>, String>: UIViewController]()
         var answerCallback: [Question<String>: (String) -> Void] = [:]
 
         func stub(for question: Question<String>, with viewController: UIViewController) {
-            stub[question] = viewController
+            stubedQuestions[question] = viewController
+        }
+
+        func stub(result: Result<Question<String>, String>, with viewController: UIViewController) {
+            stubedResults[result] = viewController
         }
 
         func questionViewController(for question: Question<String>, answerCallback: @escaping (String) -> Void) -> UIViewController {
             self.answerCallback[question] = answerCallback
-            return stub[question] ?? UIViewController()
+            return stubedQuestions[question] ?? UIViewController()
         }
+
+        func resultViewController(for result: Result<Question<String>, String>) -> UIViewController {
+            return stubedResults[result]!
+        }
+
+    }
+}
+
+extension Result: Hashable {
+    public static func == (lhs: Result<Question, Answer>, rhs: Result<Question, Answer>) -> Bool {
+        return lhs.score == rhs.score
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(score)
+    }
+}
+
+private class NonAnimatedNavigationController: UINavigationController {
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        super.pushViewController(viewController, animated: false)
     }
 }
