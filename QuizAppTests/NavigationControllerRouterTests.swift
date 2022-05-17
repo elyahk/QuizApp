@@ -57,7 +57,7 @@ class NavigationControllerRouterTests: XCTestCase{
 
     // MARK: - Helpers
 
-    final class NavigationControlllerFactoryStub: NavigationControllerFactory {
+    final class NavigationControlllerFactoryStub: ViewControllerFactory {
         var stubedQuestions = [Question<String>: UIViewController]()
         var stubedResults = [Result<Question<String>, [String]>: UIViewController]()
         var answerCallback: [Question<String>: ([String]) -> Void] = [:]
