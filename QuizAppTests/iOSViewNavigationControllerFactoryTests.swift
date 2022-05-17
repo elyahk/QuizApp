@@ -11,23 +11,29 @@ import QuizEngine
 @testable import QuizApp
 
 class iOSViewNavigationControllerFactoryTests: XCTestCase {
-    func test_questionViewController_cretatesControllerWithQuestion() {
-        let question = Question.singleAnswer("Q1")
-        let options = ["A1", "A2"]
-        let sut = iOSViewNavigationControllerFactory(options: [question: options])
+    let options: [String] = ["A1", "A2"]
 
-        let controller = sut.questionViewController(for: Question.singleAnswer("Q1"), answerCallback: { _ in } ) as! QuestionViewController
-
-        XCTAssertEqual(controller.question, "Q1")
+    func test_questionViewController_singleAnswer_cretatesControllerWithQuestion() {
+        XCTAssertEqual(makeController(question: "Q1").question, "Q1")
     }
 
-    func test_questionViewController_cretatesControllerWithOptions() {
-        let question = Question.singleAnswer("Q1")
-        let options = ["A1", "A2"]
-        let sut = iOSViewNavigationControllerFactory(options: [question: options])
+    func test_questionViewController_singleAnswer_cretatesControllerWithOptions() {
+        XCTAssertEqual(makeController().options, options)
+    }
 
-        let controller = sut.questionViewController(for: question, answerCallback: { _ in } ) as! QuestionViewController
+    func test_questionViewController_singleAnswer_cretatesControllerWithSingleSelection() {
+        let controller = makeController(question: "Q1")
+        _ = controller.view
 
-        XCTAssertEqual(controller.options, options)
+        XCTAssertFalse(controller.tableView.allowsMultipleSelection)
+    }
+
+    private func makeSUT(options: [Question<String>: [String]] = [:]) -> iOSViewNavigationControllerFactory {
+        return iOSViewNavigationControllerFactory(options: options)
+    }
+
+    private func makeController(question: String = "") -> QuestionViewController {
+        let q = Question.singleAnswer(question)
+        return makeSUT(options: [q: options]).questionViewController(for: q, answerCallback: { _ in } ) as! QuestionViewController
     }
 }
