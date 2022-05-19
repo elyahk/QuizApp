@@ -22,6 +22,8 @@
 		2C346A682828C21600D83BCE /* PresentableAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C346A672828C21600D83BCE /* PresentableAnswer.swift */; };
 		2C346A6A2828C23100D83BCE /* CorrectAnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C346A692828C23100D83BCE /* CorrectAnswerCell.swift */; };
 		2C346A6C2828C25100D83BCE /* WrongAnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C346A6B2828C25100D83BCE /* WrongAnswerCell.swift */; };
+		2C9A8B5A2835F0890005317C /* ResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9A8B592835F0890005317C /* ResultsPresenter.swift */; };
+		2C9A8B5C2835F2410005317C /* ResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9A8B5B2835F2410005317C /* ResultsPresenter.swift */; };
 		2CD1C81D283350C6002BCB83 /* iOSViewNavigationControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1C81C283350C6002BCB83 /* iOSViewNavigationControllerFactory.swift */; };
 		2CFCC2482827F821007CEB93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFCC2472827F821007CEB93 /* AppDelegate.swift */; };
 		2CFCC2512827F822007CEB93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CFCC2502827F822007CEB93 /* Assets.xcassets */; };
@@ -69,6 +71,8 @@
 		2C346A672828C21600D83BCE /* PresentableAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableAnswer.swift; sourceTree = "<group>"; };
 		2C346A692828C23100D83BCE /* CorrectAnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectAnswerCell.swift; sourceTree = "<group>"; };
 		2C346A6B2828C25100D83BCE /* WrongAnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongAnswerCell.swift; sourceTree = "<group>"; };
+		2C9A8B592835F0890005317C /* ResultsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsPresenter.swift; sourceTree = "<group>"; };
+		2C9A8B5B2835F2410005317C /* ResultsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsPresenter.swift; sourceTree = "<group>"; };
 		2CD1C81C283350C6002BCB83 /* iOSViewNavigationControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSViewNavigationControllerFactory.swift; sourceTree = "<group>"; };
 		2CFCC2442827F821007CEB93 /* QuizApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CFCC2472827F821007CEB93 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +135,7 @@
 			children = (
 				2C2206472830D82C0034FAED /* ViewControllerFactory.swift */,
 				2C346A612828AD1300D83BCE /* ResultViewController.swift */,
+				2C9A8B5B2835F2410005317C /* ResultsPresenter.swift */,
 				2C346A6B2828C25100D83BCE /* WrongAnswerCell.swift */,
 				2C346A692828C23100D83BCE /* CorrectAnswerCell.swift */,
 				2C346A672828C21600D83BCE /* PresentableAnswer.swift */,
@@ -156,6 +161,7 @@
 				2C346A632828B34800D83BCE /* Helpers.swift */,
 				2C2206342830AA640034FAED /* NavigationControllerRouterTests.swift */,
 				2C22064B2830D8BA0034FAED /* iOSViewNavigationControllerFactoryTests.swift */,
+				2C9A8B592835F0890005317C /* ResultsPresenter.swift */,
 			);
 			path = QuizAppTests;
 			sourceTree = "<group>";
@@ -265,6 +271,7 @@
 				2C22063E2830AD440034FAED /* NavigationControllerRouter.swift in Sources */,
 				2C346A682828C21600D83BCE /* PresentableAnswer.swift in Sources */,
 				2C346A6A2828C23100D83BCE /* CorrectAnswerCell.swift in Sources */,
+				2C9A8B5C2835F2410005317C /* ResultsPresenter.swift in Sources */,
 				2C346A6C2828C25100D83BCE /* WrongAnswerCell.swift in Sources */,
 				2CFCC2482827F821007CEB93 /* AppDelegate.swift in Sources */,
 				2C22064A2830D85B0034FAED /* Question.swift in Sources */,
@@ -280,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C9A8B5A2835F0890005317C /* ResultsPresenter.swift in Sources */,
 				2C2206442830BB7B0034FAED /* QuestionTests.swift in Sources */,
 				2C2206352830AA650034FAED /* NavigationControllerRouterTests.swift in Sources */,
 				2CFCC2782827FAA7007CEB93 /* QuestionViewControllerTests.swift in Sources */,
