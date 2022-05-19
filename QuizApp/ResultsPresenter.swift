@@ -17,17 +17,14 @@ struct ResultsPresenter {
     }
 
     var presentableAnswers: [PresentableAnswer] {
-        return result.answers.map { question, answers in
+        return result.answers.map { question, userAnswers in
             switch question {
-            case .singleAnswer(let value):
+            case .singleAnswer(let value), .multipleAnswer(let value):
                 return PresentableAnswer(
                     question: value,
-                    answer: correctAnswers[question]!.first!,
-                    wrongAnswer: nil
+                    answer: correctAnswers[question]!.joined(separator: ", "),
+                    wrongAnswer: userAnswers.joined(separator: ", ")
                 )
-
-            default:
-                return PresentableAnswer(question: "", answer: "", wrongAnswer: nil)
             }
         }
     }
