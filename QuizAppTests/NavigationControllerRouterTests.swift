@@ -86,7 +86,7 @@ class NavigationControllerRouterTests: XCTestCase{
 
         factory.answerCallback[Question.multipleAnswer("Q2")]!(["A1"])
         let button = viewController.navigationItem.rightBarButtonItem!
-        button.target?.performSelector(onMainThread: button.action!, with: nil, waitUntilDone: true)
+        button.simulateTap()
 
         XCTAssertTrue(button.isEnabled)
         XCTAssertTrue(callBackWasFired)
@@ -141,5 +141,12 @@ extension Result: Hashable {
 private class NonAnimatedNavigationController: UINavigationController {
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         super.pushViewController(viewController, animated: false)
+    }
+}
+
+
+private extension UIBarButtonItem {
+    func simulateTap() {
+        target?.performSelector(onMainThread: action!, with: nil, waitUntilDone: true)
     }
 }
