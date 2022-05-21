@@ -77,6 +77,21 @@ class NavigationControllerRouterTests: XCTestCase{
         XCTAssertFalse(viewController.navigationItem.rightBarButtonItem!.isEnabled)
     }
 
+    func test_routeToQuestion_multipleAnswerSubmitButton_progressToNextQuestion() {
+        let viewController = UIViewController()
+        factory.stub(for: Question.multipleAnswer("Q2"), with: viewController)
+
+        var callBackWasFired = false
+        sut.routeTo(question: Question.multipleAnswer("Q2"), answerCallback: { _ in callBackWasFired = true })
+
+        factory.answerCallback[Question.multipleAnswer("Q2")]!(["A1"])
+        let button = viewController.navigationItem.rightBarButtonItem!
+        button.target?.performSelector(onMainThread: button.action!, with: nil, waitUntilDone: true)
+
+        XCTAssertTrue(button.isEnabled)
+        XCTAssertTrue(callBackWasFired)
+    }
+
     func test_routeToResult_showsResultViewController() {
         let result = Result(answers: [Question.singleAnswer("a string"): ["A1"]], score: 1)
         let viewController = UIViewController()
