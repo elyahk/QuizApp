@@ -63,6 +63,20 @@ class NavigationControllerRouterTests: XCTestCase{
         XCTAssertNotNil(viewController.navigationItem.rightBarButtonItem)
     }
 
+    func test_routeToQuestion_multipleAnswer_configureButtonEnableAndDisableBySelectedAnswerCount() {
+        let viewController = UIViewController()
+        factory.stub(for: Question.multipleAnswer("Q2"), with: viewController)
+
+        sut.routeTo(question: Question.multipleAnswer("Q2"), answerCallback: { _ in })
+        XCTAssertFalse(viewController.navigationItem.rightBarButtonItem!.isEnabled)
+
+        factory.answerCallback[Question.multipleAnswer("Q2")]!(["A1"])
+        XCTAssertTrue(viewController.navigationItem.rightBarButtonItem!.isEnabled)
+
+        factory.answerCallback[Question.multipleAnswer("Q2")]!([])
+        XCTAssertFalse(viewController.navigationItem.rightBarButtonItem!.isEnabled)
+    }
+
     func test_routeToResult_showsResultViewController() {
         let result = Result(answers: [Question.singleAnswer("a string"): ["A1"]], score: 1)
         let viewController = UIViewController()
