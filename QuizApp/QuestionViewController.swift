@@ -17,6 +17,7 @@ class QuestionViewController: UIViewController {
         view.dataSource = self
         view.delegate = self
         view.backgroundColor = .systemGray5
+        view.allowsMultipleSelection = isAllowsMultipleSelection
 
         return view
     }()
@@ -24,14 +25,16 @@ class QuestionViewController: UIViewController {
     private(set) var question = ""
     private(set) var options = [String]()
     private var selection: (([String]) -> Void)? = nil
+    private var isAllowsMultipleSelection: Bool = false
     private let reuseIdentifier = "Cell"
 
-    convenience init(question: String, options: [String], selection: @escaping ([String]) -> Void) {
+    convenience init(question: String, options: [String], isAllowsMultipleSelection: Bool, selection: @escaping ([String]) -> Void) {
         self.init()
 
         self.question = question
         self.options = options
         self.selection = selection
+        self.isAllowsMultipleSelection = isAllowsMultipleSelection
     }
 
     override func loadView() {
