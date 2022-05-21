@@ -54,8 +54,23 @@ class iOSViewNavigationControllerFactoryTests: XCTestCase {
         XCTAssertTrue(controller.tableView.allowsMultipleSelection)
     }
 
-    private func makeSUT(questions: [Question<String>] = [], options: [Question<String>: [String]] = [:]) -> iOSViewNavigationControllerFactory {
-        return iOSViewNavigationControllerFactory(questions: questions, options: options)
+    func test_resultViewController_createsControllerWithSummary() {
+        let questions = [singleAnswerQuestion, multipleAnswerQuestion]
+        let correctAnswers = [singleAnswerQuestion: ["A1"], multipleAnswerQuestion: ["A1", "A2"]]
+        let userAnswers = [singleAnswerQuestion: ["A1"], multipleAnswerQuestion: ["A1", "A2"]]
+        let result = Result(answers: userAnswers, score: 2)
+        let sut = makeSUT(questions: questions, options: correctAnswers, correctAnswers: correctAnswers)
+
+        let presenter = ResultsPresenter(result: result, questions: questions, correctAnswers: correctAnswers)
+        let controller = sut.resultViewController(for: result) as! ResultViewController
+
+        XCTAssertEqual(controller.summary, presenter.summary)
+    }
+
+    // MARK: - Helpers
+
+    private func makeSUT(questions: [Question<String>] = [], options: [Question<String>: [String]] = [:], correctAnswers: [Question<String>: [String]] = [:]) -> iOSViewNavigationControllerFactory {
+        return iOSViewNavigationControllerFactory(questions: questions, options: options, correctAnswers: correctAnswers)
     }
 
     private func makeController(questions: [Question<String>] = [], question: Question<String> = .singleAnswer("")) -> QuestionViewController {

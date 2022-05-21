@@ -30,22 +30,22 @@ final class ResultViewController: UIViewController {
         return view
     }()
 
-    private var result = ""
-    private var answers = [PresentableAnswer]()
+    private(set) var summary = ""
+    private(set) var presentableAnswers = [PresentableAnswer]()
     private let correctAnswerCellIdentifier = "CorrectAnswerCell"
     private let wrongAnswerCellIdentifier = "WrongAnswerCell"
 
-    convenience init(result: String, answers: [PresentableAnswer]) {
+    convenience init(summary: String, presentableAnswers: [PresentableAnswer]) {
         self.init()
 
-        self.result = result
-        self.answers = answers
+        self.summary = summary
+        self.presentableAnswers = presentableAnswers
     }
 
     override func loadView() {
         super.loadView()
 
-        headerLabel.text = result
+        headerLabel.text = summary
         setupSubviews()
     }
 
@@ -73,11 +73,11 @@ final class ResultViewController: UIViewController {
 
 extension ResultViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return answers.count
+        return presentableAnswers.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let answer = answers[indexPath.row]
+        let answer = presentableAnswers[indexPath.row]
 
         return answer.wrongAnswer == nil ? correctAnswerCell(for: answer) : wrongAnswerCell(for: answer)
     }
