@@ -25,7 +25,10 @@ class iOSViewNavigationControllerFactory: ViewControllerFactory {
     private func questionViewController(for question: Question<String>, options: [String], answerCallback: @escaping ([String]) -> Void) -> UIViewController {
         switch question {
         case .singleAnswer(let value):
-            return QuestionViewController(question: value, options: options, selection: answerCallback)
+            let controller =  QuestionViewController(question: value, options: options, selection: answerCallback)
+            controller.title = "Question #1"
+
+            return controller
 
         case .multipleAnswer(let value):
             let controller = QuestionViewController(question: value, options: options, selection: answerCallback)

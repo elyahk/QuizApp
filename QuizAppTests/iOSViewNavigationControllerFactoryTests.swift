@@ -12,6 +12,9 @@ import QuizEngine
 
 class iOSViewNavigationControllerFactoryTests: XCTestCase {
     let options: [String] = ["A1", "A2"]
+    func test_questionViewController_singleAnswer_cretatesControllerWithTitle() {
+        XCTAssertEqual(makeController(question: .singleAnswer("Q1")).title, "Question #1")
+    }
 
     func test_questionViewController_singleAnswer_cretatesControllerWithQuestion() {
         XCTAssertEqual(makeController(question: .singleAnswer("Q1")).question, "Q1")
