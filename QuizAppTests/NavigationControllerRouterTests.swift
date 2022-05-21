@@ -38,12 +38,20 @@ class NavigationControllerRouterTests: XCTestCase{
         XCTAssertEqual(navigationController.viewControllers, [viewController, secondViewController])
     }
 
-    func test_routeToQuestion_presentsQuestionViewControllerWithRightCallback() {
+    func test_routeToQuestion_singleAnswer_answerCallback_progressesToNextQuestion() {
         var callbackWasFired = false
         sut.routeTo(question: Question.singleAnswer("Q1"), answerCallback: { _ in callbackWasFired = true })
         factory.answerCallback[.singleAnswer("Q1")]!(["anything"])
 
         XCTAssertTrue(callbackWasFired)
+    }
+
+    func test_routeToQuestion_multipleAnswer_answerCallback_doesNotProgressesToNextQuestion() {
+        var callbackWasFired = false
+        sut.routeTo(question: Question.multipleAnswer("Q2"), answerCallback: { _ in callbackWasFired = true })
+        factory.answerCallback[.multipleAnswer("Q2")]!(["anything"])
+
+        XCTAssertFalse(callbackWasFired)
     }
 
     func test_routeToResult_showsResultViewController() {
