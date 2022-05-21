@@ -12,6 +12,8 @@ struct QuestionPresenter {
     let question: Question<String>
 
     var title: String {
-        return "Question #1"
+        guard let index = questions.firstIndex(of: question) else { return "" }
+
+        return "Question #\(index + 1)"
     }
 }
