@@ -36,7 +36,7 @@ class ResultViewControllerTests: XCTestCase {
     // MARK: - Helpers
 
     private func makeSUT(result: String = "", answers: [PresentableAnswer] = []) -> ResultViewController {
-        let sut = ResultViewController(result: result, answers: answers)
+        let sut = ResultViewController(summary: result, presentableAnswers: answers)
         _ = sut.view
 
         return sut
