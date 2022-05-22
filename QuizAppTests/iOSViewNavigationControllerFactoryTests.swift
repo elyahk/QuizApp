@@ -54,6 +54,12 @@ class iOSViewNavigationControllerFactoryTests: XCTestCase {
         XCTAssertTrue(controller.tableView.allowsMultipleSelection)
     }
 
+    func test_resultViewController_createsControllerWithTitle() {
+        let result = results()
+
+        XCTAssertEqual(result.controller.title, result.presenter.title)
+    }
+
     func test_resultViewController_createsControllerWithSummaryAndPresentableAnswers() {
         let result = results()
 

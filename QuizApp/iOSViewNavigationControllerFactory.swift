@@ -65,6 +65,9 @@ class iOSViewNavigationControllerFactory: ViewControllerFactory {
 
     func resultViewController(for result: Result<Question<String>, [String]>) -> UIViewController {
         let presenter = ResultsPresenter(result: result, questions: questions, correctAnswers: correctAnswers)
-        return ResultViewController(summary: presenter.summary, presentableAnswers: presenter.presentableAnswers)
+        let controller = ResultViewController(summary: presenter.summary, presentableAnswers: presenter.presentableAnswers)
+        controller.title = presenter.title
+
+        return controller
     }
 }
