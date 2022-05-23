@@ -31,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationRouter = NavigationControllerRouter(navigationController, factory: factory)
 
         game = startGame(questions: questions, router: navigationRouter, answers: correctAnswers)
-
         self.window = window
         self.window?.rootViewController = navigationController
         window.makeKeyAndVisible()
